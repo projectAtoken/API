@@ -13,19 +13,22 @@ router.post('/', async (req, res) => {
      }
 
      //  멤버가 존재하는지,
-     let member = await User.findOne({ MemberName: req.body.MemberName });
+     let member = await Member.findOne({ MemberName: req.body.MemberName });
      if (!member) {
          return res.status(400).send('아이디가 존재하지 않습니다.');
      }
 
-     // Then validate the Credentials in MongoDB match
-     // those provided in the request
+     // 망고디비와 비교.
      const validPassword = await bcrypt.compare(req.body.MemberPassword, member.MemberPassword);
      if (!validPassword) {
          return res.status(400).send('비밀번호가 맞지 않습니다.');
      }
+     let response = {
+       "result":200
+     }
 
-     res.send(true);
+     res.status(200).json(response);
+     res.send('로그인 되었습니다.');
 });
 
 

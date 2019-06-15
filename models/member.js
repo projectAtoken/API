@@ -1,3 +1,4 @@
+//멤버에 대한 지정
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
