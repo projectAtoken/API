@@ -9,7 +9,7 @@ const app = express();
 const membernew = require('./routes/membernew');
 const login = require('./routes/login');
 const accountnew = require('./routes/accountnew');
-const send = require('./routes/send');
+const sendnew = require('./routes/send');
 const getbalance = require('./routes/getbalance');
 const transaction = require('./routes/transaction');
 
@@ -38,7 +38,7 @@ app.use(passport.session());
 */
 
 // 망고디비에 연결
-mongoose.connect('mongodb://localhost/1')
+mongoose.connect('mongodb://localhost/1', { useNewUrlParser: true })
     .then(() => console.log('Now connected to MongoDB!'))
     .catch(err => console.error('Something went wrong', err));
 
@@ -47,11 +47,11 @@ app.use(express.json());
 app.use('/API/membernew', membernew);
 app.use('/API/login', login);
 app.use('/API/accountnew',accountnew);
-app.use('/API/send',send);
+app.use('/API/send',sendnew);
 app.use('/API/getbalance',getbalance);
 app.use('/API/transaction',transaction);
 
 
 //포트 연결
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

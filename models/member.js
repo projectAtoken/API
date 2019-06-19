@@ -3,7 +3,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 const Member = mongoose.model('Member', new mongoose.Schema({
-    MemberName: {
+    userName: {
         type: String,
         required: true,
         minlength: 5,
@@ -11,7 +11,7 @@ const Member = mongoose.model('Member', new mongoose.Schema({
         unique: true
     },
 
-    MemberPassword: {
+    userPassword: {
         type: String,
         required: true,
         minlength: 5,
@@ -21,8 +21,10 @@ const Member = mongoose.model('Member', new mongoose.Schema({
 
 function validateMember(member) {
     const schema = {
-        MemberName: Joi.string().min(5).max(50).required().email(),
-        MemberPassword: Joi.string().min(5).max(255).required()
+        userName: Joi.string().min(5).max(50).required().email(),
+        userPassword: Joi.string().min(5).max(255).required(),
+        securityKey: "Haveagoodday"
+
     };
     return Joi.validate(member, schema);
 }
